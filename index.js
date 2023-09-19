@@ -1,6 +1,8 @@
+// Import the inquirer and file system module in order to make the file interactive
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// Define the input HTML Content
 const innerHTMLDoc = ({ name, location, bio, github, linkedin }) =>
 `
 <!DOCTYPE html>
@@ -30,7 +32,7 @@ const innerHTMLDoc = ({ name, location, bio, github, linkedin }) =>
 </body>
 </html>
 `
-
+// A function taking in an array of question objects as its argument that prompt the user for their input
 inquirer
   .prompt([
     {
@@ -83,10 +85,20 @@ inquirer
 //   });
 
   // ATTEMPT THREE
+// An asynchronous function that returns a Promise. Once resolved, it passes the input data from the prompt to the callback function
 .then((input) => {
+
+    // Create a variable to process the input data into the called HTML function 
     const portfolio = innerHTMLDoc(input);
 
+    // Using the file system module to write the portfolio data into an index.html file
+    // index.html is the file where the portfolio data will be saved in
+    // portfolio is the data that will be written in the file
+    // (err) => is a callback function that gets excecuted after if there is an error that occurs during the process
     fs.writeFile('index.html', portfolio, (err) =>
+
+      // A ternary operator that checks if there is an error
+      // If true, it will log an error to the console, but if false, it logs the success message
       err ? console.log(err) : console.log('Thank you! Here is your Portfolio! :)')
     );
   });
