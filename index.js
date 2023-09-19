@@ -21,8 +21,8 @@ const innerHTMLDoc = ({ name, location, bio, github, linkedin }) =>
             <p>${bio}</p>
             <h3 class="lead">It is nice to meet you! <span class="badge bg-success">Contact Me</span></h3>
             <ul class="list-group">
-                <li class="list-group-item list-group-item-success text-dark">Here is my Github: ${github}</li>
-                <li class="list-group-item list-group-item-success text-dark">Here is my LinkedIn: ${linkedin}</li>
+                <li class="list-group-item list-group-item-success text-dark"><strong>Here is my Github:</strong> ${github}</li>
+                <li class="list-group-item list-group-item-success text-dark"><strong>Here is my LinkedIn:</strong> ${linkedin}</li>
             </ul>
         </div>
     </header>
@@ -59,6 +59,8 @@ inquirer
         name: 'linkedin',
     },
   ])
+
+  // ATTEMPT ONE
 //   .then((response) =>
 //     response.confirm === response.password
 //       ? console.log('Success!')
@@ -71,10 +73,20 @@ inquirer
 //     );
 //   });
 
-  .then((data) => {
-    const portfolio = innerHTMLDoc(data);
+  // ATTEMPT TWO
+//   .then((data) => {
+//     const portfolio = innerHTMLDoc(data);
 
-    fs.writeFile(portfolio, JSON.stringify(data, null, '\t'), (err) =>
-      err ? console.log(err) : console.log('Success!')
+//     fs.writeFile(portfolio, JSON.stringify(data, null, '\t'), (err) =>
+//       err ? console.log(err) : console.log('Success!')
+//     );
+//   });
+
+  // ATTEMPT THREE
+.then((input) => {
+    const portfolio = innerHTMLDoc(input);
+
+    fs.writeFile('index.html', portfolio, (err) =>
+      err ? console.log(err) : console.log('Thank you! Here is your Portfolio! :)')
     );
   });
